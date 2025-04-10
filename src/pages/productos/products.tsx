@@ -6,8 +6,8 @@ export const Products : React.FC <TipoProductos> = ({productos}) => {
             <div>
                 {productos.length > 0 ? (productos.map((product, index)=> (
                     <div key={index}>
-                        <h1>{product.nombre}</h1>
-                        <h2>{product.precio}</h2>
+                        <h1>{}</h1>
+                        <h2>{}</h2>
                     </div>
                     )))
                     :
