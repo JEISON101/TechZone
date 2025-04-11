@@ -1,18 +1,31 @@
-interface TipoProductos {productos:object[]}
+import { useNavigate } from "react-router-dom";
 
-export const Products : React.FC <TipoProductos> = ({productos}) => {
-    return(
-        <>
-            <div>
-                {productos.length > 0 ? (productos.map((product, index)=> (
-                    <div key={index}>
-                        <h1>{}</h1>
-                        <h2>{}</h2>
-                    </div>
-                    )))
-                    :
-                    (<h1>No hay productos disponibles</h1>)}
-            </div>
-        </>
-    )
+interface Producto {
+  id:string;
+  nombre: string;
+  precio: number;
+  detalles?:string;
 }
+
+interface TipoProductos {
+  productos: Producto[];
+}
+
+export const Products: React.FC<TipoProductos> = ({ productos }) => {
+    const navigate = useNavigate();
+  return (
+    <>
+      {productos.length > 0 ? (
+        productos.map((product) => (
+          <div key={product.id} className="card-producto">
+            <h1>{product.nombre}</h1>
+            <h2>precio: ${product.precio}</h2>
+            <button onClick={()=>navigate(`/Detalles/${product.id}`, {state:product})}>Ver detalles</button>
+          </div>
+        ))
+      ) : (
+        <h1>No hay productos disponibles</h1>
+      )}
+    </>
+  );
+};
